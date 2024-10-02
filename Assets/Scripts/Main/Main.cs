@@ -8,5 +8,5 @@ using UnityEngine;
 /// </summary>
 public class Main : MonoBehaviour
 {
-    public static int MaxHealth;
+    public static int MaxHealth=200;
 }
