@@ -11,9 +11,8 @@ public class PlayerControl: MonoBehaviour
     private void Start()
     {
         currentHealth = Main.MaxHealth;
-        rb = GetComponent<Rigidbody2D>();
-/*        StartCoroutine(Shoot());
-        StartCoroutine(Dying());*/
+        rb = this.GetComponent<Rigidbody2D>();
+        StartCoroutine(Dying());
     }
     void Update()
     {
