@@ -27,7 +27,7 @@ public class PlayerControl: MonoBehaviour
         {
             yield return 0;
         }
-        Debug.Log("you are dead");
+        Debug.Log("ฤในามหฃก");
     }
     public void ChangeHealth(int value)
     {
