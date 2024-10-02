@@ -8,6 +8,7 @@ public class PlayerControl: MonoBehaviour
     private long currentHealth;
     Rigidbody2D rb;
     //public Animator animator;
+
     private void Start()
     {
         currentHealth = Main.MaxHealth;
