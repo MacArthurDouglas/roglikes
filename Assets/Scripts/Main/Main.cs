@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,4 +10,5 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     public static int MaxHealth=200;
+    public static int Damage=10;
 }
