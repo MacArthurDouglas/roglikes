@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class Start_Quit: MonoBehaviour
 {
-    private Button Button_start;
+/*    private Button Button_start;
     private Button Button_quit;
     private Button Button_quit_1;
     private Button Button_backtoS;
     GameObject canves_start;
-    GameObject canves_quit;
+    GameObject canves_quit;*/
 
-    public void Start()
+/*    public void Start()
     {   canves_start =GameObject.Find("Canvas_Start");
         Button_start = canves_start.transform.Find("startBtn").GetComponent<Button>();
         Button_quit = canves_start.transform.Find("quitBtn").GetComponent<Button>();
@@ -36,14 +36,15 @@ public class Start_Quit: MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) { canves_quit.SetActive(true); }
-    }
+    }*/
     public void StartLoadingGame()
     {   
-        canves_start.SetActive(false);
+        //canves_start.SetActive(false);
+        SceneManager.LoadScene("Main");
     }
     public void Quit(){
-        canves_start.SetActive(false);
-        canves_quit.SetActive(false);
+        //canves_start.SetActive(false);
+        //canves_quit.SetActive(false);
         Application.Quit();
     }
 
