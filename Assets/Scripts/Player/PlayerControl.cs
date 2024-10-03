@@ -16,6 +16,7 @@ public class PlayerControl: MonoBehaviour
     public KeyCode fireLeftKey = KeyCode.LeftArrow;
     public KeyCode fireRightKey = KeyCode.RightArrow;
     public static Vector2 CurrentDirection;
+    public static bool CanMove;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class PlayerControl: MonoBehaviour
         StartCoroutine(Dying());
         Surface=true;
         CurrentDirection = new Vector2(0,1);
+        CanMove = false;
     }
     void Update()
     {
@@ -50,7 +52,11 @@ public class PlayerControl: MonoBehaviour
         }
         Vector3 movement = new Vector3(move.x,move.y, 0f);
         //animator.SetFloat("Horizontal",movement.x);
-        rb.velocity = new Vector2(movement.x*speed, movement.y*speed);
+        if (CanMove)
+        {
+            rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+        }
+        
         Vector2 dirc = new Vector2(0, 0);
         if (Input.GetKey(fireUpKey))
         {
