@@ -21,8 +21,7 @@ public class InnerForm : MonoBehaviour
       
         if (Player == null)
         {
-            Debug.LogError("Player or Triangle Texture is not set!");
-            return;
+           
         }
     }
     private void Update()
