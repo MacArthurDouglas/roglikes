@@ -15,17 +15,11 @@ public class SurfaceForm : MonoBehaviour
 
     public float centerDistance = 3f;
     public float damage = 10f;
-    private LineRenderer lineRenderer;
     public LayerMask targetLayer;
 
     private void Start()
     {
         canFire = true;
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 50;
-        lineRenderer.startWidth = 1f;
-        lineRenderer.endWidth = 1f;
-        lineRenderer.useWorldSpace = false;
         targetLayer = 1<<gameObject.layer;//赋值为自己所在的图层
     }
     Vector2 UnitDirection(Vector2 direction)
@@ -39,19 +33,25 @@ public class SurfaceForm : MonoBehaviour
     public void NormalAttack()
     {
 /*       if (!canFire)
-        {
+       {
             return;
-        }
+       }
         Vector2 unitDirection = UnitDirection(PlayerControl.CurrentDirection);
         Vector3 center = new Vector3(0,0,0);
         center.x=this.transform.position.x-unitDirection.x*centerDistance;
         center.y=this.transform.position.y-unitDirection.y*centerDistance;
         center.z = this.transform.position.z;
+        SweepDamage(center,unitDirection);
         Debug.Log("aaa");
         StartCoroutine(AttackCooling());*/
     }
-    void SweepDamage(Vector3 center, Vector3 forwardDirection)
+    IEnumerator Sweeping(Vector3 center, Vector2 forwardDirection)
     {
+        yield return null;
+    }
+    void SweepDamage(Vector3 center, Vector2 forwardDirection)
+    {
+/*        Sweeping();
         // 检测周围的敌人
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(center, currentRadius, targetLayer);
 
@@ -68,7 +68,7 @@ public class SurfaceForm : MonoBehaviour
                 // 在这里调用目标的伤害处理方法，例如：collider.GetComponent<Enemy>().TakeDamage(damage);
                 Debug.Log($"Target {collider.name} hit for {damage} damage!");
             }
-        }
+        }*/
     }
     
     private IEnumerator AttackCooling()

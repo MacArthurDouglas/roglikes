@@ -4,20 +4,12 @@ using UnityEngine;
 public class PlayerControl: MonoBehaviour
 {
     public float speed;
-<<<<<<< HEAD
-    private float currentHealth;
-    Rigidbody2D rb;
-<<<<<<< .merge_file_R3Hgyn
-
     //无敌时间
     public bool IsInvincible { get; private set; } // 无敌状态
     private float invincibleTimer;
     //public Animator animator;
-=======
-=======
-    private long currentHealth;
+    private int currentHealth;
     public Rigidbody2D rb;
->>>>>>> ecb199d0bca0b379d858c4aca25980463073ac7f
     public static bool Surface;
     public KeyCode moveUpKey = KeyCode.W;
     public KeyCode moveDownKey = KeyCode.S;
@@ -29,7 +21,6 @@ public class PlayerControl: MonoBehaviour
     public KeyCode fireRightKey = KeyCode.RightArrow;
     public static Vector2 CurrentDirection;
     public static bool CanMove;
->>>>>>> .merge_file_A2vjFT
 
     private void Start()
     {
@@ -65,9 +56,8 @@ public class PlayerControl: MonoBehaviour
         }
         Vector3 movement = new Vector3(move.x,move.y, 0f);
         //animator.SetFloat("Horizontal",movement.x);
-<<<<<<< .merge_file_R3Hgyn
         rb.velocity = new Vector2(movement.x*speed, movement.y*speed);
-        print(currentHealth);
+        //print(currentHealth);
         if (IsInvincible)
         {
             invincibleTimer -= Time.deltaTime;
@@ -76,7 +66,6 @@ public class PlayerControl: MonoBehaviour
                 IsInvincible = false; // 结束无敌状态
             }
         }
-=======
         if (CanMove)
         {
             rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
@@ -148,8 +137,6 @@ public class PlayerControl: MonoBehaviour
                 this.GetComponent<SurfaceForm>().NormalAttack();
             }
         }
-
->>>>>>> .merge_file_A2vjFT
     }
     IEnumerator Dying()
     {
@@ -164,7 +151,7 @@ public class PlayerControl: MonoBehaviour
         if (!IsInvincible) // 只有在不无敌的情况下才改变生命值
         {
             currentHealth += value; // 更新当前生命值
-            currentHealth = Mathf.Clamp(currentHealth, 0, Main.MaxHealth); // 限制生命值在 0 和最大值之
+            currentHealth = Mathf.Clamp(currentHealth, 0, Main.MaxHealth);
         }
     }
     public void StartInvincibleTime(float duration)
@@ -172,9 +159,4 @@ public class PlayerControl: MonoBehaviour
         IsInvincible = true; // 设置无敌状态
         invincibleTimer = duration; // 设置无敌时间
     }
-<<<<<<< .merge_file_R3Hgyn
-
-=======
-    
->>>>>>> .merge_file_A2vjFT
 }
