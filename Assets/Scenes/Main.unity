@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 16
+  rb: {fileID: 0}
   moveUpKey: 119
   moveDownKey: 115
   moveLeftKey: 97
@@ -319,7 +320,13 @@ MonoBehaviour:
   canFire: 0
   angle: 60
   expansionSpeed: 0.1
-  maxRadius: 5
+  expandRadius: 5
+  startRadius: 3
+  centerDistance: 3
+  damage: 10
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &386176171
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,11 @@ public class SurfaceForm : MonoBehaviour
     public bool canFire;
     public float angle = 60f;
     public float expansionSpeed = 0.1f;
-    public float maxRadius=5f;
-    private float startRadius=3f;
+    public float expandRadius=5f;
+    public float startRadius=6f;
     private float currentRadius;
+
+    public float centerDistance = 3f;
     public float damage = 10f;
     private LineRenderer lineRenderer;
     public LayerMask targetLayer;
@@ -36,17 +38,16 @@ public class SurfaceForm : MonoBehaviour
     }
     public void NormalAttack()
     {
-/*        if (!canFire)
+/*       if (!canFire)
         {
             return;
         }
         Vector2 unitDirection = UnitDirection(PlayerControl.CurrentDirection);
         Vector3 center = new Vector3(0,0,0);
-        center.x=
-
-        DrawArc();
-        SweepDamage();
-
+        center.x=this.transform.position.x-unitDirection.x*centerDistance;
+        center.y=this.transform.position.y-unitDirection.y*centerDistance;
+        center.z = this.transform.position.z;
+        Debug.Log("aaa");
         StartCoroutine(AttackCooling());*/
     }
     void SweepDamage(Vector3 center, Vector3 forwardDirection)
@@ -69,28 +70,7 @@ public class SurfaceForm : MonoBehaviour
             }
         }
     }
-    void DrawArc(Vector3 center, Vector3 direction)
-    {
-        // 计算圆弧的起始和结束角度
-        float halfAngle = angle / 2;
-        float startAngle = -halfAngle;
-        float endAngle = halfAngle;
-
-        // 生成圆弧点
-        for (int i = 0; i < lineRenderer.positionCount; i++)
-        {
-            float t = i / (float)(lineRenderer.positionCount - 1);
-            float currentAngle = Mathf.Lerp(startAngle, endAngle, t);
-            float radian = currentAngle * Mathf.Deg2Rad;
-
-            // 计算圆弧上每个点的位置
-            Vector3 point = new Vector3(Mathf.Sin(radian), Mathf.Cos(radian)) * currentRadius;
-            point = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.up, direction, Vector3.forward)) * point; // 旋转到指定方向
-            point += center; // 将点移动到圆心位置
-
-            lineRenderer.SetPosition(i, point);
-        }
-    }
+    
     private IEnumerator AttackCooling()
     {
         canFire = false;

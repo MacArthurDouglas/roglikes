@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerControl: MonoBehaviour
 {
     public float speed;
+<<<<<<< HEAD
     private float currentHealth;
     Rigidbody2D rb;
 <<<<<<< .merge_file_R3Hgyn
@@ -13,6 +14,10 @@ public class PlayerControl: MonoBehaviour
     private float invincibleTimer;
     //public Animator animator;
 =======
+=======
+    private long currentHealth;
+    public Rigidbody2D rb;
+>>>>>>> ecb199d0bca0b379d858c4aca25980463073ac7f
     public static bool Surface;
     public KeyCode moveUpKey = KeyCode.W;
     public KeyCode moveDownKey = KeyCode.S;
@@ -33,7 +38,7 @@ public class PlayerControl: MonoBehaviour
         StartCoroutine(Dying());
         Surface=true;
         CurrentDirection = new Vector2(0,1);
-        CanMove = false;
+        CanMove = true;
     }
     void Update()
     {
