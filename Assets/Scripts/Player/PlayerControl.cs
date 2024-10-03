@@ -5,7 +5,7 @@ public class PlayerControl: MonoBehaviour
 {
     public float speed;
     private long currentHealth;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public static bool Surface;
     public KeyCode moveUpKey = KeyCode.W;
     public KeyCode moveDownKey = KeyCode.S;
@@ -25,7 +25,7 @@ public class PlayerControl: MonoBehaviour
         StartCoroutine(Dying());
         Surface=true;
         CurrentDirection = new Vector2(0,1);
-        CanMove = false;
+        CanMove = true;
     }
     void Update()
     {
