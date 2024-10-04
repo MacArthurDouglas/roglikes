@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 425569572}
   - component: {fileID: 425569571}
   m_Layer: 0
-  m_Name: heart pixel art 48x48
+  m_Name: heart_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,12 +455,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425569570}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.730703, y: 4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.730703, y: 4, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1363065000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &626121839
 GameObject:
@@ -1130,7 +1130,7 @@ GameObject:
   - component: {fileID: 870388906}
   - component: {fileID: 870388905}
   m_Layer: 0
-  m_Name: heart pixel art 48x48 (1)
+  m_Name: heart_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1196,12 +1196,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870388904}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.1, y: 4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.1, y: 4, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1363065000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &953240502
 GameObject:
@@ -1463,6 +1463,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1420532053}
+  - {fileID: 425569572}
+  - {fileID: 870388906}
+  - {fileID: 1564719343}
+  - {fileID: 1963435413}
   m_Father: {fileID: 1397101947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397101944
@@ -1598,7 +1602,7 @@ GameObject:
   - component: {fileID: 1420532053}
   - component: {fileID: 1420532054}
   m_Layer: 0
-  m_Name: Heart
+  m_Name: heart_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1682,7 +1686,7 @@ GameObject:
   - component: {fileID: 1564719343}
   - component: {fileID: 1564719342}
   m_Layer: 0
-  m_Name: heart pixel art 48x48 (2)
+  m_Name: heart_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1748,12 +1752,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564719341}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.46, y: 4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.46, y: 4, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1363065000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1641936493
 GameObject:
@@ -2169,7 +2173,7 @@ GameObject:
   - component: {fileID: 1963435413}
   - component: {fileID: 1963435412}
   m_Layer: 0
-  m_Name: heart pixel art 48x48 (3)
+  m_Name: heart_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2235,12 +2239,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963435411}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.806, y: 4, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.806, y: 4, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1363065000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -2250,7 +2254,3 @@ SceneRoots:
   - {fileID: 1641936495}
   - {fileID: 1318375156}
   - {fileID: 839847005}
-  - {fileID: 425569572}
-  - {fileID: 870388906}
-  - {fileID: 1564719343}
-  - {fileID: 1963435413}
