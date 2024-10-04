@@ -9,17 +9,16 @@ public class JianQi : MonoBehaviour
     public float damage = 10f;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
-    public int surviveFrame;
-    private int currentFrame;
+    private Animator animator;
     private Vector3 startLocation;
     private float transparency;
     void Start()
     {
+        animator = GetComponent<Animator>();
         //currentDirection=new Vector2 (1,0);
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         startLocation = transform.position;
-        currentFrame = 0;
         transparency = 1f;
 
         transform.eulerAngles=Main.GetEulerAnglesByDirection(currentDirection);
@@ -49,7 +48,7 @@ public class JianQi : MonoBehaviour
             case "jianQi_4":
                 boxCollider.offset = new Vector2(-0.007259198f, 0.0003111959f);
                 boxCollider.size = new Vector2(0.2732362f, 0.6489449f);
-                currentFrame++;
+                animator.speed = 0;
                 break;
             default:
 
@@ -63,7 +62,7 @@ public class JianQi : MonoBehaviour
         Vector2 moving =unitDirection*expandDistancePerFrame*Time.deltaTime;
         Vector3 finalMoving = new Vector3(moving.x, moving.y, 0);
         transform.position += finalMoving;
-        if (currentFrame>=surviveFrame)
+        if (transparency <= 0.1)
         {
             Destroy(gameObject);
         }

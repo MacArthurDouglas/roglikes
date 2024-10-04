@@ -904,7 +904,7 @@ Transform:
   m_GameObject: {fileID: 27669217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.55, y: 0.99, z: 5.6733}
+  m_LocalPosition: {x: 2.5416, y: 1.0576, z: 5.6733}
   m_LocalScale: {x: 2.233099, y: 3.2830522, z: 3.2830522}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46879,7 +46879,7 @@ Transform:
   m_GameObject: {fileID: 1845353486}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.55, y: 0.99808, z: 5.6733}
+  m_LocalPosition: {x: 2.5928, y: 0.99808, z: 5.6733}
   m_LocalScale: {x: 3.077682, y: 1.308015, z: 3.077682}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48676,8 +48676,6 @@ MonoBehaviour:
   TriangleObject: {fileID: 7589344949190001445, guid: 1ed636152cdc78d4e90d58d60ea9e983, type: 3}
   Rush_distance: 0.4
   attackDelay: 0.8
-  sprinting: 0
-  sprintingTime: 1
 --- !u!114 &1911210831
 MonoBehaviour:
   m_ObjectHideFlags: 0

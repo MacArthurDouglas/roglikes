@@ -18,6 +18,8 @@ public class PlayerControl: MonoBehaviour
     public KeyCode fireDownKey = KeyCode.DownArrow;
     public KeyCode fireLeftKey = KeyCode.LeftArrow;
     public KeyCode fireRightKey = KeyCode.RightArrow;
+    public KeyCode test_specialAttack = KeyCode.E;
+    public KeyCode test_switchSurface = KeyCode.Q;
     public static Vector2 CurrentDirection;
     public static bool CanMove;
     public Animator animator;
@@ -29,7 +31,7 @@ public class PlayerControl: MonoBehaviour
         currentHealth = Main.MaxHealth;
         rb = this.GetComponent<Rigidbody2D>();
         StartCoroutine(Dying());
-        Surface=false;
+        Surface=true;
         CurrentDirection = new Vector2(0,1);
         CanMove = true;
         animator = GetComponent<Animator>();
@@ -44,6 +46,21 @@ public class PlayerControl: MonoBehaviour
         Vector3 move = Vector3.zero;
         bool fire=false;
         animator.SetBool("surface", Surface);
+        if (Input.GetKey(test_specialAttack))
+        {
+            if (Surface)
+            {
+                GetComponent<SurfaceForm>().SpecialAttack();
+            }
+            else
+            {
+                GetComponent<InnerForm>().SpecialAttack();
+            }
+        }
+        if (Input.GetKey(test_switchSurface))
+        {
+            Surface = !Surface;
+        }
         if (Input.GetKey(moveUpKey))
         {
             move += new Vector3(0, 1, 0); // Ç°½ø

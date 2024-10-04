@@ -7,13 +7,12 @@ using UnityEngine;
 public class InnerForm : MonoBehaviour
 {
     private GameObject player;
-    public GameObject TriangleObject;
     private PlayerControl playerControl;
     public float Rush_distance=0.4f;
-    private GameObject TriangleObject_0;
     public float attackDelay=0.8f;
     private Animator animator;
     private bool canFire;
+    public GameObject innerBurstPrefab;
     
     [HideInInspector]public bool sprinting;//³å´Ì
     public float sprintingTime = 1f;
@@ -26,10 +25,7 @@ public class InnerForm : MonoBehaviour
         canFire = true;
         sprinting = false;
     }
-    public void SpecialAttack()
-    {
-
-    }
+    
     private void Update()
     {
         if (sprinting)
@@ -46,6 +42,10 @@ public class InnerForm : MonoBehaviour
         animator.SetBool("attacking", true);
         StartCoroutine(Sprinting(sprintingTime));
         StartCoroutine(Cooldown());
+    }
+    public void SpecialAttack()
+    {
+        Instantiate(innerBurstPrefab);
     }
     IEnumerator Sprinting(float time)
     {

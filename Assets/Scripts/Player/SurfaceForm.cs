@@ -9,6 +9,7 @@ public class SurfaceForm : MonoBehaviour
     public bool canFire;
     public float centerDistance = 1f;
     public GameObject jianQiPrefab;
+    public GameObject jiGuangPrefab;
     private Animator animator;
     private void Start()
     {
@@ -41,7 +42,6 @@ public class SurfaceForm : MonoBehaviour
 
         GameObject obj=Instantiate(jianQiPrefab,center,this.transform.rotation);
         obj.GetComponent<JianQi>().currentDirection=PlayerControl.CurrentDirection;
-        //Debug.Log("aaa");
         StartCoroutine(AttackCooling());
     }
     
@@ -54,6 +54,6 @@ public class SurfaceForm : MonoBehaviour
     }
     public void SpecialAttack()
     {
-
+        Instantiate(jiGuangPrefab, this.transform.position,this.transform.rotation);
     }
 }
