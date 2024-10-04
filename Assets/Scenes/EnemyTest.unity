@@ -232,6 +232,37 @@ MonoBehaviour:
   eliteEnemyPrefab2: {fileID: 6059934187251107369, guid: fce52d02179fb564bb6e06c8782b6906, type: 3}
   player: {fileID: 899115605}
   spawnRadius: 20
+--- !u!1 &845645419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 845645421}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &845645421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845645419}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9642895, y: 1.5064219, z: -9.961058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &899115600
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +305,9 @@ MonoBehaviour:
   fireDownKey: 274
   fireLeftKey: 276
   fireRightKey: 275
+  test_specialAttack: 101
+  test_switchSurface: 113
+  animator: {fileID: 0}
 --- !u!61 &899115602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -334,7 +368,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -419,3 +453,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 899115605}
+  - {fileID: 845645421}

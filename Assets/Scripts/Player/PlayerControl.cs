@@ -42,10 +42,11 @@ public class PlayerControl: MonoBehaviour
     }
     void Update()
     {
+        print(currentHealth);
         moved = false;
         Vector3 move = Vector3.zero;
         bool fire=false;
-        animator.SetBool("surface", Surface);
+       // animator.SetBool("surface", Surface);
         if (Input.GetKey(test_specialAttack))
         {
             if (Surface)

@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     public float detectionRadius = 1.0f; // 检测半径
     public float avoidDistance = 0.5f; // 避让距离
 
-    [SerializeField] private GameObject player;
+    [SerializeField] protected GameObject player;
 
     protected virtual void Start()
     {
@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void MoveTowardsPlayer()
+    protected virtual void MoveTowardsPlayer()
     {
         // 计算敌人和玩家之间的方向
         Vector3 direction = (player.transform.position - transform.position).normalized;
