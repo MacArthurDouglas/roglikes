@@ -25,6 +25,7 @@ public class SurfaceForm : MonoBehaviour
     }
     public void NormalAttack()
     {
+        
         if (!canFire)
         {
             return;

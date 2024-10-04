@@ -17,14 +17,49 @@ public class JianQi : MonoBehaviour
     public int surviveFrame;
     private int currentFrame;
     private Vector3 startLocation;
+    private float transparency;
     void Start()
     {
         //currentDirection=new Vector2 (1,0);
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        transform.Rotate(0,0,90f);
         startLocation = transform.position;
         currentFrame = 0;
+        transparency = 1f;
+
+        if (currentDirection.x == 0 && currentDirection.y == 1)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (currentDirection.x == 0 && currentDirection.y == -1)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 180);
+        }
+        else if (currentDirection.x == 1 && currentDirection.y == 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 270);
+        }
+        else if (currentDirection.x == -1 && currentDirection.y == 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 90);
+        }
+        else if (currentDirection.x == 1 && currentDirection.y == 1)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 315);
+        }
+        else if (currentDirection.x == -1 && currentDirection.y == -1)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 135);
+        }
+        else if (currentDirection.x == -1 && currentDirection.y == 1)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 45);
+        }
+        else if (currentDirection.x == 1 && currentDirection.y == -1)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 225);
+        }
+        transform.Rotate(0, 0, 90f);
     }
     void Update()
     {
@@ -37,22 +72,19 @@ public class JianQi : MonoBehaviour
             case "jianQi_1":
                 boxCollider.offset = new Vector2(-0.000391528f, -0.004839465f);
                 boxCollider.size = new Vector2(0.1427509f, 0.2677902f);
-                spriteRenderer.color = new Color(1f,1f,1f,0.5f);
+                
                 break;
             case "jianQi_2":
                 boxCollider.offset = new Vector2(0.004759196f, 0.01232962f);
                 boxCollider.size = new Vector2(0.2285965f, 0.4532168f);
-                spriteRenderer.color = new Color(1f, 1f, 1f, 0.4f);
                 break;
             case "jianQi_3":
                 boxCollider.offset = new Vector2(-0.002108455f, -0.001405686f);
                 boxCollider.size = new Vector2(0.2629347f, 0.4944227f);
-                spriteRenderer.color = new Color(1f, 1f, 1f, 0.2f);
                 break;
             case "jianQi_4":
                 boxCollider.offset = new Vector2(-0.007259198f, 0.0003111959f);
                 boxCollider.size = new Vector2(0.2732362f, 0.6489449f);
-                spriteRenderer.color = new Color(1f, 1f, 1f, 0.1f);
                 currentFrame++;
                 break;
             default:
@@ -61,8 +93,8 @@ public class JianQi : MonoBehaviour
                 break;
 
         }
-
-
+        transparency -= 0.001f;
+        spriteRenderer.color = new Color(1f, 1f, 1f, transparency);
         Vector2 unitDirection = SurfaceForm.UnitDirection(currentDirection);
         Vector2 moving =unitDirection*expandDistancePerFrame*Time.deltaTime;
         Vector3 finalMoving = new Vector3(moving.x, moving.y, 0);
