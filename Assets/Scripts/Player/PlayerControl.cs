@@ -34,12 +34,16 @@ public class PlayerControl: MonoBehaviour
         CanMove = true;
         animator = GetComponent<Animator>();
         innerForm = GetComponent<InnerForm>();
+        animator.SetBool("dying", false);
+        animator.SetBool("resurrection", false);
+        animator.SetBool("surface", Surface);
     }
     void Update()
     {
         moved = false;
         Vector3 move = Vector3.zero;
         bool fire=false;
+        animator.SetBool("surface", Surface);
         if (Input.GetKey(moveUpKey))
         {
             move += new Vector3(0, 1, 0); // Ç°½ø
@@ -170,6 +174,7 @@ public class PlayerControl: MonoBehaviour
         {
             yield return 0;
         }
+        animator.SetBool("dying", true);
         Debug.Log("Äã¹ÒÁË£¡");
     }
     public void ChangeHealth(int value)
