@@ -7,7 +7,7 @@ public class SurfaceForm : MonoBehaviour
 {
     public float attackDelay=0.8f;
     public bool canFire;
-    public float centerDistance = 3f;
+    public float centerDistance = 1f;
     public GameObject jianQiPrefab;
 
     private void Start()
@@ -15,7 +15,7 @@ public class SurfaceForm : MonoBehaviour
         canFire = true;
         
     }
-    Vector2 UnitDirection(Vector2 direction)
+    public static Vector2 UnitDirection(Vector2 direction)
     {
         Vector2 unitDirection=new Vector2(0,0);
         float distance = direction.magnitude;
@@ -25,7 +25,7 @@ public class SurfaceForm : MonoBehaviour
     }
     public void NormalAttack()
     {
-/*        if (!canFire)
+        if (!canFire)
         {
             return;
         }
@@ -37,8 +37,8 @@ public class SurfaceForm : MonoBehaviour
 
         GameObject obj=Instantiate(jianQiPrefab,center,this.transform.rotation);
         obj.GetComponent<JianQi>().currentDirection=PlayerControl.CurrentDirection;
-        Debug.Log("aaa");
-        StartCoroutine(AttackCooling());*/
+        //Debug.Log("aaa");
+        StartCoroutine(AttackCooling());
     }
     
     
