@@ -22,17 +22,18 @@ public class PlayerControl: MonoBehaviour
     public static bool CanMove;
     public Animator animator;
     private bool moved;
+    private InnerForm innerForm;
 
     private void Start()
     {
         currentHealth = Main.MaxHealth;
         rb = this.GetComponent<Rigidbody2D>();
         StartCoroutine(Dying());
-        Surface=true;
+        Surface=false;
         CurrentDirection = new Vector2(0,1);
         CanMove = true;
         animator = GetComponent<Animator>();
-        
+        innerForm = GetComponent<InnerForm>();
     }
     void Update()
     {
@@ -63,18 +64,8 @@ public class PlayerControl: MonoBehaviour
             moved = true;
         }
         Vector3 movement = new Vector3(move.x,move.y, 0f);
-        
-        if (IsInvincible)
-        {
-            invincibleTimer -= Time.deltaTime;
-            if (invincibleTimer <= 0)
-            {
-                IsInvincible = false; // ½áÊøÎÞµÐ×´Ì¬
-            }
-        }
         if (CanMove)
         {
-            //rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
             transform.position += movement * speed*Time.deltaTime;
             if (moved)
             {
@@ -85,7 +76,14 @@ public class PlayerControl: MonoBehaviour
                 animator.SetBool("running", false);
             }
         }
-        
+        if (IsInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer <= 0)
+            {
+                IsInvincible = false; // ½áÊøÎÞµÐ×´Ì¬
+            }
+        }
         Vector2 dirc = new Vector2(0, 0);
         if (Input.GetKey(fireUpKey))
         {
@@ -111,7 +109,11 @@ public class PlayerControl: MonoBehaviour
         }
         if (fire)
         {
-            CurrentDirection = dirc;
+            if (Surface || ((!Surface) && !innerForm.sprinting))
+            {
+                CurrentDirection = dirc;
+            }
+            
         }
         Vector3 characterScale = transform.localScale;
         if (CurrentDirection.x >= 0)
@@ -149,7 +151,11 @@ public class PlayerControl: MonoBehaviour
         }
         else
         {
-            animator.SetBool("attacking", false);
+            if (!innerForm.sprinting)
+            {
+                animator.SetBool("attacking", false);
+            }
+            
         }
     }
     static IEnumerator DisabledMove(float seconds)

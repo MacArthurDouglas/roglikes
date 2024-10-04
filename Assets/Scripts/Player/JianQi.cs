@@ -5,11 +5,6 @@ using UnityEngine;
 public class JianQi : MonoBehaviour
 {
     public float expandDistancePerFrame;
-    public Sprite jianQi_0;
-    public Sprite jianQi_1;
-    public Sprite jianQi_2;
-    public Sprite jianQi_3;
-    public Sprite jianQi_4;
     [HideInInspector] public Vector2 currentDirection;
     public float damage = 10f;
     private BoxCollider2D boxCollider;
@@ -27,38 +22,7 @@ public class JianQi : MonoBehaviour
         currentFrame = 0;
         transparency = 1f;
 
-        if (currentDirection.x == 0 && currentDirection.y == 1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (currentDirection.x == 0 && currentDirection.y == -1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 180);
-        }
-        else if (currentDirection.x == 1 && currentDirection.y == 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 270);
-        }
-        else if (currentDirection.x == -1 && currentDirection.y == 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 90);
-        }
-        else if (currentDirection.x == 1 && currentDirection.y == 1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 315);
-        }
-        else if (currentDirection.x == -1 && currentDirection.y == -1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 135);
-        }
-        else if (currentDirection.x == -1 && currentDirection.y == 1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 45);
-        }
-        else if (currentDirection.x == 1 && currentDirection.y == -1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 225);
-        }
+        transform.eulerAngles=Main.GetEulerAnglesByDirection(currentDirection);
         transform.Rotate(0, 0, 90f);
     }
     void Update()
