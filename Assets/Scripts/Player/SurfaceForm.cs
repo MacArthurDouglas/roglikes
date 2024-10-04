@@ -9,10 +9,12 @@ public class SurfaceForm : MonoBehaviour
     public bool canFire;
     public float centerDistance = 1f;
     public GameObject jianQiPrefab;
-
+    private Animator animator;
     private void Start()
     {
         canFire = true;
+        animator = GetComponent<Animator>();
+
         
     }
     public static Vector2 UnitDirection(Vector2 direction)
@@ -30,6 +32,7 @@ public class SurfaceForm : MonoBehaviour
         {
             return;
         }
+        animator.SetBool("attacking", true);
         Vector2 unitDirection = UnitDirection(PlayerControl.CurrentDirection);
         Vector3 center = new Vector3(0,0,0);
         center.x=this.transform.position.x-unitDirection.x*centerDistance;

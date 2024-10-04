@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class InnerForm : MonoBehaviour
@@ -10,30 +11,33 @@ public class InnerForm : MonoBehaviour
     private PlayerControl playerControl;
     public float Rush_distance=0.4f;
     private GameObject TriangleObject_0;
-    public float CD;
     public float attackDelay=0.8f;
+    private Animator animator;
+    private bool canFire;
 
      void Start()
     {
         player=this.gameObject;
         playerControl=this.GetComponent<PlayerControl>();
+        animator=this.GetComponent<Animator>();
+        canFire = true;
     }
-    private void Update()
-    {
-       
-    }
-
     public void SpecialAttack()
     {
 
     }
     public void NormalAttack()
     {
-       Vector2 atk_direction= PlayerControl.CurrentDirection.normalized;
-       TrigCreator(atk_direction);
-       PlayerControl.CanMove=false;//关闭速度更改
+        if (!canFire)
+        {
+            return;
+        }
+        animator.SetBool("attacking", true);
+        Vector2 atk_direction= PlayerControl.CurrentDirection.normalized;
+        TrigCreator(atk_direction);
+        PlayerControl.CanMove=false;//关闭速度更改
 
-       player.transform.eulerAngles = new Vector3(atk_direction.x, atk_direction.y, 0);
+        player.transform.eulerAngles = new Vector3(atk_direction.x, atk_direction.y, 0);
         Vector3 tem_position = player.transform.position;
         playerControl.rb.velocity= atk_direction * 2*playerControl.speed;//改变人物朝向和速度方向
 
@@ -79,6 +83,8 @@ public class InnerForm : MonoBehaviour
 
     IEnumerator Cooldown()//CD
     {
+        canFire= false;
         yield return new WaitForSeconds(attackDelay);
+        canFire= true;
     }
 }

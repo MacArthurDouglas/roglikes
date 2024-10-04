@@ -9,7 +9,7 @@ public class PlayerControl: MonoBehaviour
     private float invincibleTimer;
     private int currentHealth;
     public Rigidbody2D rb;
-    public static bool Surface;
+    public static bool Surface;//是否是表形态
     public KeyCode moveUpKey = KeyCode.W;
     public KeyCode moveDownKey = KeyCode.S;
     public KeyCode moveLeftKey = KeyCode.A;
@@ -130,41 +130,10 @@ public class PlayerControl: MonoBehaviour
         }
 
         transform.localScale = characterScale;
-/*        if (CurrentDirection.x == 0 && CurrentDirection.y == 1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if(CurrentDirection.x == 0 &&CurrentDirection.y == -1){
-            transform.eulerAngles = new Vector3(0, 0, 180);
-        }
-        else if (CurrentDirection.x == 1 && CurrentDirection.y == 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 270);
-        }
-        else if (CurrentDirection.x == -1 && CurrentDirection.y == 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 90);
-        }
-        else if (CurrentDirection.x == 1 && CurrentDirection.y == 1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 315);
-        }
-        else if (CurrentDirection.x == -1 && CurrentDirection.y == -1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 135);
-        }
-        else if (CurrentDirection.x == -1 && CurrentDirection.y == 1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 45);
-        }
-        else if (CurrentDirection.x == 1 && CurrentDirection.y == -1)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 225);
-        }*/
 
         if (fire)
         {
-            animator.SetBool("attacking",true);
+            
             if (Surface)
             {
                 this.GetComponent<SurfaceForm>().NormalAttack();
