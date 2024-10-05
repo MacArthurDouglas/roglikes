@@ -67,14 +67,18 @@ public class EliteEnemyMovement : EnemyMovement
             {
                 playerControl.ChangeHealth(-20);
                 playerControl.StartInvincibleTime(1f);
-                animator1.SetBool("isExploding", true); // 播放爆炸动画
+
+                // 播放爆炸动画
+                animator1.SetTrigger("explode"); // 使用 Trigger 触发爆炸动画
+                yield return new WaitForSeconds(21.5f); // 等待动画播放时间
                 animator1.SetBool("isDead", true); // 播放死亡动画
-                Destroy(gameObject, 1f); // 延迟销毁敌人
+                Destroy(gameObject, 5f); // 延迟销毁敌人
             }
         }
 
         isDashing = false;
     }
+
 
     private void UseSpecialAbility()
     {

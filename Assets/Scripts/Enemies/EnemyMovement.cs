@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 direction = (player.transform.position - transform.position).normalized;
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        float stoppingDistance = 1.0f;
+        float stoppingDistance = 0.1f;
 
         if (distance > stoppingDistance)
         {

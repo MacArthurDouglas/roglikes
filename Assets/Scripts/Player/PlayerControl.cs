@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl: MonoBehaviour
 {
@@ -25,10 +26,14 @@ public class PlayerControl: MonoBehaviour
     public Animator animator;
     private bool moved;
     private InnerForm innerForm;
+    public int maxHearts = 5; // 最大心数
+    public int heartValue = 40; // 每颗心对应的生命值
+    public Image[] heartImages; // UI中的心形图像数组
 
     private void Start()
     {
         currentHealth = Main.MaxHealth;
+        UpdateHeartUI(); // 初始化心的UI
         rb = this.GetComponent<Rigidbody2D>();
         StartCoroutine(Dying());
         Surface=true;
@@ -197,10 +202,24 @@ public class PlayerControl: MonoBehaviour
     }
     public void ChangeHealth(int value)
     {
+
         if (!IsInvincible) // 只有在不无敌的情况下才改变生命值
         {
             currentHealth += value; // 更新当前生命值
             currentHealth = Mathf.Clamp(currentHealth, 0, Main.MaxHealth);
+
+            // 更新心的UI
+            UpdateHeartUI();
+        }
+    }
+    private void UpdateHeartUI()
+    {
+        int currentHearts = maxHearts - (Main.MaxHealth - currentHealth) / heartValue;
+
+        for (int i = 0; i < heartImages.Length; i++)
+        {
+            // 根据当前心的数量显示或隐藏心形图像
+            heartImages[i].enabled = i < currentHearts;
         }
     }
     public void StartInvincibleTime(float duration)

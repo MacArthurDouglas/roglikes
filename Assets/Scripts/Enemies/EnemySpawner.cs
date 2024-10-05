@@ -5,12 +5,15 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab; // 普通敌人预制件
     public GameObject eliteEnemyPrefab; // 精英敌人预制件
-    public GameObject eliteEnemyPrefab2;
+    public GameObject eliteEnemyPrefab2; // 另一个精英敌人预制件
     public Transform player;
     public float spawnRadius = 20f;
     private Camera mainCamera;
     private int maxEnemies = 8;
     private List<GameObject> enemies = new List<GameObject>(); // 用于跟踪敌人列表
+
+    // 预定义的生成位置
+    public List<Transform> spawnPoints; // 存储生成位置的列表
 
     void Start()
     {
@@ -30,22 +33,17 @@ public class EnemySpawner : MonoBehaviour
                 if (enemies.Count >= maxEnemies)
                     break;
 
-                Vector3 spawnPosition;
-                do
-                {
-                    spawnPosition = player.position + new Vector3(
-                        Random.Range(-spawnRadius, spawnRadius),
-                        Random.Range(-spawnRadius, spawnRadius),
-                        0); // 如果是2D游戏，Z轴固定为0
-                } while (IsVisibleFromCamera(spawnPosition));
+                // 随机选择一个生成位置
+                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                Vector3 spawnPosition = spawnPoint.position;
 
                 GameObject newEnemy;
                 float randomValue = Random.Range(0f, 1f);
-                if (randomValue < 0.1f) // 5% 概率生成精英怪 1
+                if (randomValue < 0.2f) // 5% 概率生成精英怪 1
                 {
                     newEnemy = Instantiate(eliteEnemyPrefab, spawnPosition, Quaternion.identity);
                 }
-                else if (randomValue < 0.4f) // 20% 概率生成精英怪 2（25% - 5% = 20%）
+                else if (randomValue < 0.2f) // 20% 概率生成精英怪 2（25% - 5% = 20%）
                 {
                     newEnemy = Instantiate(eliteEnemyPrefab2, spawnPosition, Quaternion.identity);
                 }
@@ -57,11 +55,5 @@ public class EnemySpawner : MonoBehaviour
                 enemies.Add(newEnemy); // 添加新生成的敌人到列表
             }
         }
-    }
-
-    bool IsVisibleFromCamera(Vector3 position)
-    {
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
-        return GeometryUtility.TestPlanesAABB(planes, new Bounds(position, Vector3.one));
     }
 }
