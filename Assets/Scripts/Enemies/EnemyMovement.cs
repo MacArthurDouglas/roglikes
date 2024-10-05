@@ -6,12 +6,13 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 50; // 敌人的移动速度
     public float detectionRadius = 1.0f; // 检测半径
     public float avoidDistance = 0.5f; // 避让距离
-
+    private Animator animator;
     [SerializeField] protected GameObject player;
 
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
+        animator = GetComponent<Animator>(); // 获取Animator组件
     }
 
     protected virtual void Update()
@@ -20,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
         {
             MoveTowardsPlayer();
             AvoidOverlap(); // 添加避让逻辑
+            animator.SetBool("isWalking", Vector3.Distance(transform.position, player.transform.position) > 1.0f);
         }
         else
         {
@@ -42,26 +44,24 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void MoveTowardsPlayer()
     {
-        // 计算敌人和玩家之间的方向
         Vector3 direction = (player.transform.position - transform.position).normalized;
-
-        // 计算距离
         float distance = Vector3.Distance(transform.position, player.transform.position);
+        float stoppingDistance = 1.0f;
 
-        // 设置一个停止移动的距离
-        float stoppingDistance = 1.0f; 
-
-        // 仅在距离大于停止距离时移动
         if (distance > stoppingDistance)
         {
-            // 计算移动的目标位置
-            Vector3 targetPosition = transform.position + direction * speed * Time.deltaTime;
+            // 这里设置为行走状态
+            animator.SetBool("isWalking", true);
 
-            // 更新敌人的位置
+            Vector3 targetPosition = transform.position + direction * speed * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, targetPosition, 0.5f);
         }
+        else
+        {
+            // 如果玩家在攻击范围内，设置攻击状态
+            animator.SetBool("isAttacking", true);
+        }
     }
-
     /// <summary>
     /// 碰到玩家的box collider的时候执行
     /// </summary>
@@ -70,14 +70,17 @@ public class EnemyMovement : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             PlayerControl playerControl = collision.collider.GetComponent<PlayerControl>();
-            if (!playerControl.IsInvincible) // 检查玩家是否无敌
+            if (!playerControl.IsInvincible)
             {
                 playerControl.ChangeHealth(-10);
-                playerControl.StartInvincibleTime(1f); // 启动无敌时间
+                playerControl.StartInvincibleTime(1f);
             }
 
+            // 设置死亡状态
+            animator.SetBool("isDead", true);
+
             // 销毁敌人
-            Destroy(gameObject);
+            Destroy(gameObject, 1f); // 延迟1秒后销毁，给动画播放时间
         }
     }
 

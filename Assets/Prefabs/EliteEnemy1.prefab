@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1805995951795174338}
   - component: {fileID: -8230273206012969678}
   - component: {fileID: 383550884289965506}
+  - component: {fileID: -2964550050321929688}
   m_Layer: 0
   m_Name: EliteEnemy1
   m_TagString: Enemy
@@ -148,3 +149,24 @@ MonoBehaviour:
   avoidDistance: 0.5
   player: {fileID: 0}
   specialAbilityCooldown: 5
+--- !u!95 &-2964550050321929688
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266759063917268812}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 972349a843734b04abb956bcacff696a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

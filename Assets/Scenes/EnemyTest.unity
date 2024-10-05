@@ -673,12 +673,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  heartImages:
-  - {fileID: 7373797}
-  - {fileID: 292677663}
-  - {fileID: 2142541851}
-  - {fileID: 186185812}
-  - {fileID: 2031614277}
   rb: {fileID: 0}
   moveUpKey: 119
   moveDownKey: 115
