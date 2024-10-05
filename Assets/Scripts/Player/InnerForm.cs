@@ -15,7 +15,7 @@ public class InnerForm : MonoBehaviour
     public GameObject trianglePrefab;
     private GameObject triangle;
     public bool sprinting;//冲刺
-    public static float sprintingTime=0.4f;//冲刺时间
+    public static float sprintingTime=0.3f;//冲刺时间
     
 
      void Start()
