@@ -8,11 +8,12 @@ public class EnemyMovement : MonoBehaviour
     public float avoidDistance = 0.5f; // 避让距离
     private Animator animator;
     [SerializeField] protected GameObject player;
-
+    public MonsterManager monsterManager;
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>(); // 获取Animator组件
+        monsterManager = FindObjectOfType<MonsterManager>();
     }
 
     protected virtual void Update()
@@ -78,9 +79,9 @@ public class EnemyMovement : MonoBehaviour
 
             // 设置死亡状态
             animator.SetBool("isDead", true);
-
             // 销毁敌人
             Destroy(gameObject, 1f); // 延迟1秒后销毁，给动画播放时间
+            monsterManager.OnMonsterDeath();
         }
     }
 

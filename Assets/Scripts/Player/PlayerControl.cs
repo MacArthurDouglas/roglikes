@@ -29,6 +29,9 @@ public class PlayerControl: MonoBehaviour
     public int maxHearts = 5; // 最大心数
     public int heartValue = 40; // 每颗心对应的生命值
     public Image[] heartImages; // UI中的心形图像数组
+    private AudioSource audioSource;
+    public AudioClip walkSound; // 引用行走音效
+    public AudioClip attackSound; // 攻击音效
 
     private void Start()
     {
@@ -44,6 +47,8 @@ public class PlayerControl: MonoBehaviour
         animator.SetBool("dying", false);
         animator.SetBool("resurrection", false);
         animator.SetBool("surface", Surface);
+        audioSource = GameObject.Find("AudioManager1").GetComponent<AudioSource>();
+
     }
     void Update()
     {
@@ -93,14 +98,22 @@ public class PlayerControl: MonoBehaviour
         Vector3 movement = new Vector3(move.x,move.y, 0f);
         if (CanMove)
         {
-            transform.position += movement * speed*Time.deltaTime;
+            transform.position += movement * speed * Time.deltaTime;
             if (moved)
             {
-                animator.SetBool("running",true);
+                animator.SetBool("running", true);
+                if (!audioSource.isPlaying) // 检查音效是否正在播放
+                {
+                    audioSource.PlayOneShot(walkSound);
+                }
             }
             else
             {
                 animator.SetBool("running", false);
+                if (audioSource.isPlaying) // 检查音效是否正在播放
+                {
+                    audioSource.Stop(); // 停止音效
+                }
             }
         }
         if (IsInvincible)
@@ -112,28 +125,34 @@ public class PlayerControl: MonoBehaviour
             }
         }
         Vector2 dirc = new Vector2(0, 0);
-        if (Input.GetKey(fireUpKey))
+        if (Input.GetKeyDown(fireUpKey))
         {
-            dirc += new Vector2(0,1) ;
-            
+            dirc += new Vector2(0, 1);
             fire = true;
+            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
-        if (Input.GetKey(fireDownKey))
+
+        if (Input.GetKeyDown(fireDownKey))
         {
             dirc += new Vector2(0, -1);
-            
             fire = true;
+            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
-        if (Input.GetKey(fireRightKey))
+
+        if (Input.GetKeyDown(fireRightKey))
         {
             dirc += new Vector2(1, 0);
             fire = true;
+            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
-        if (Input.GetKey(fireLeftKey))
+
+        if (Input.GetKeyDown(fireLeftKey))
         {
             dirc += new Vector2(-1, 0);
             fire = true;
+            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
+
         if (fire)
         {
             if (Surface || ((!Surface) && !innerForm.sprinting))
