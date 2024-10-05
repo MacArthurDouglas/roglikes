@@ -13,7 +13,8 @@ public class InnerForm : MonoBehaviour
     private Animator animator;
     private bool canFire;
     public GameObject innerBurstPrefab;
-    
+    public GameObject trianglePrefab;
+    private GameObject triangle;
     [HideInInspector]public bool sprinting;//³å´Ì
     public float sprintingTime = 1f;
 
@@ -24,6 +25,10 @@ public class InnerForm : MonoBehaviour
         animator=this.GetComponent<Animator>();
         canFire = true;
         sprinting = false;
+        if (triangle == null)
+        {
+            triangle = Instantiate(trianglePrefab);
+        }
     }
     
     private void Update()

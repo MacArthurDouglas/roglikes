@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MyCamera : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
