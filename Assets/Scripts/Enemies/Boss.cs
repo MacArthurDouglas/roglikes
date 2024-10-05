@@ -9,18 +9,27 @@ public class Boss : MonoBehaviour
     public GameObject[] fivePoints;
     public GameObject[] eightPoints;
     public static int MaxHealth=200;
-    public static int CurrentHealth;
-    public GameObject tentacle;//触手
+    public static int CurrentHealth; 
+
+    public GameObject slimeCanMove;//可以移动的史莱姆
+    public GameObject slimeStatic;//不可移动的史莱姆
+
     public GameObject selfExplodeMonster;//自爆怪
-    public float attackDelay=5f;
+    private GameObject player;
+    private float attackDelay=5f;
+    private float normalAttackDelay = 10f;
     private bool attckCooling;
+    private bool normalAttackCooling;
     private int beingAttackedTimes;
     private int whenTimesSkill;
+   
     private bool usedSkill1;
     private bool usedSkill2;
     public GameObject bossHealthBar;
     private float invincibleTime = 0.5f;
     private bool invincible;
+    private bool skill2finished;
+    private Vector3 centerOfMagicCircle=new Vector3(4.96f,18.92f,-2.22f);
     private void Start()
     {
         beingAttackedTimes = 0;
@@ -28,8 +37,13 @@ public class Boss : MonoBehaviour
         usedSkill1=false;
         usedSkill2=false;
         invincible=false;
-        CurrentHealth=MaxHealth;
+        skill2finished=false;
+        normalAttackCooling= false;
+        player = GameObject.FindWithTag("Player");
+        CurrentHealth = MaxHealth;
         ShowBossHealth();
+        StartCoroutine(NormalAttackCool());
+        
 
     }
     public void ShowBossHealth()
@@ -39,14 +53,14 @@ public class Boss : MonoBehaviour
     }
     private void Update()
     {
-/*        if (beingAttackedTimes>=4&&beingAttackedTimes<9)
+        if (beingAttackedTimes>=5&&beingAttackedTimes<10)
         {
             if (!usedSkill1&&attckCooling==false)
             {
                 StartCoroutine(Skill1());
             }
         }
-        else if(beingAttackedTimes>=9)
+        else if(beingAttackedTimes>=10)
         {
             if (!usedSkill2 && attckCooling == false)
             {
@@ -56,28 +70,48 @@ public class Boss : MonoBehaviour
         else {
             if (attckCooling == false)
             {
-                StartCoroutine(NormalAttack());
+                StartCoroutine(Moving());
             }
-        }*/
+        }
     }
-    IEnumerator NormalAttack()
+    IEnumerator NormalAttackCool() { 
+        normalAttackCooling = true;
+        yield return new WaitForSeconds(normalAttackDelay);
+        normalAttackCooling= false;
+    }
+    IEnumerator Moving()
     {
         attckCooling = true;
         int randomPoint;
-        for (int i = 0; i < 3; i++)
-        {
-            randomPoint = Random.Range(0, 8);//返回0-7的整数
-            Instantiate(tentacle, eightPoints[randomPoint].transform.position,Quaternion.identity);
-        }
+        randomPoint = Random.Range(0, 5);
 
+        transform.position = fivePoints[randomPoint].transform.position;
+        if (!normalAttackCooling)
+        {
+            StartCoroutine(NormalAttack());
+        }
         
         yield return new WaitForSeconds(attackDelay);
         attckCooling=false;
 
     }
-    IEnumerator Flying()
+    IEnumerator NormalAttack()
     {
-        yield return new WaitForSeconds(0.1f);
+
+        //地板晃动
+        yield return new WaitForSeconds(0.5f);
+        bool[] visited = new bool[8];
+        int random;
+        for(int i = 0; i < 3; i++)
+        {
+            random=Random.Range(0, 8);
+            if (!visited[random])
+            {
+                visited[random]=true;
+                Instantiate(slimeCanMove, eightPoints[random].transform.position,Quaternion.identity);
+
+            }
+        }
     }
     IEnumerator Skill1()
     {
@@ -95,12 +129,30 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(attackDelay);
         attckCooling=false;
     }
+    IEnumerator SummonSlime()
+    {
+        while (!skill2finished) {
+            yield return new WaitForSeconds(4f);
+            Instantiate(slimeStatic,player.transform.position,Quaternion.identity);
+
+
+        }
+    }
     IEnumerator Skill2()
     {
         usedSkill2 = true;
         attckCooling = true;
+        beingAttackedTimes = 0;
+        this.transform.position=centerOfMagicCircle;//回到法阵中心
+        invincible = true;//进入无敌
+        skill2finished = false;
+        StartCoroutine(SummonSlime());
+        while (!skill2finished) {
+            yield return null;
+        }
+        
+        
 
-        StartCoroutine(Flying());
 
         yield return new WaitForSeconds(attackDelay);
         attckCooling = false;
