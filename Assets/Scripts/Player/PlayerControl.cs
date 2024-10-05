@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerControl: MonoBehaviour
 {
@@ -9,8 +8,6 @@ public class PlayerControl: MonoBehaviour
     public bool IsInvincible { get; private set; } // 无敌状态
     private float invincibleTimer;
     private int currentHealth;
-
-    public Image[] heartImages; // 通过Inspector关联心形图标
     public Rigidbody2D rb;
     public static bool Surface;//是否是表形态
     public KeyCode moveUpKey = KeyCode.W;
@@ -32,7 +29,6 @@ public class PlayerControl: MonoBehaviour
     private void Start()
     {
         currentHealth = Main.MaxHealth;
-        UpdateHeartsUI(5); // 初始化显示5颗心
         rb = this.GetComponent<Rigidbody2D>();
         StartCoroutine(Dying());
         Surface=true;
@@ -50,7 +46,7 @@ public class PlayerControl: MonoBehaviour
         moved = false;
         Vector3 move = Vector3.zero;
         bool fire=false;
-        //animator.SetBool("surface", Surface);
+        animator.SetBool("surface", Surface);
         if (Input.GetKey(test_specialAttack))
         {
             if (Surface)
@@ -184,20 +180,6 @@ public class PlayerControl: MonoBehaviour
             
         }
     }
-    public void UpdateHeartsUI(int remainingHearts)
-    {
-        for (int i = 0; i < heartImages.Length; i++)
-        {
-            if (i < remainingHearts)
-            {
-                heartImages[i].gameObject.SetActive(true); // 显示心形图标
-            }
-            else
-            {
-                heartImages[i].gameObject.SetActive(false); // 隐藏心形图标
-            }
-        }
-    }
     static IEnumerator DisabledMove(float seconds)
     {
         CanMove = false;
@@ -215,37 +197,15 @@ public class PlayerControl: MonoBehaviour
     }
     public void ChangeHealth(int value)
     {
-        if (!IsInvincible)
+        if (!IsInvincible) // 只有在不无敌的情况下才改变生命值
         {
-            currentHealth += value;
+            currentHealth += value; // 更新当前生命值
             currentHealth = Mathf.Clamp(currentHealth, 0, Main.MaxHealth);
-
-            // 计算需要减少的心数
-            int heartsLost = Mathf.FloorToInt((Main.MaxHealth - currentHealth) / 40);
-
-            // 确保不超过5颗心
-            heartsLost = Mathf.Min(heartsLost, 5);
-
-            Debug.Log("Current Health: " + currentHealth);
-            Debug.Log("Hearts Lost: " + heartsLost);
-
-            // 这里可以调用更新UI的方法，显示剩余心数
-            UpdateHeartsUI(5 - heartsLost);
-        }
-        else
-        {
-            Debug.Log("Player is invincible, health not changed.");
         }
     }
     public void StartInvincibleTime(float duration)
     {
         IsInvincible = true; // 设置无敌状态
         invincibleTimer = duration; // 设置无敌时间
-        StartCoroutine(ResetInvincibleState(duration)); // 启动协程
-    }
-    private IEnumerator ResetInvincibleState(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        IsInvincible = false; // 重置无敌状态
     }
 }

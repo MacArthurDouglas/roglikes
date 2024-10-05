@@ -8,15 +8,15 @@ public class InnerForm : MonoBehaviour
 {
     private GameObject player;
     private PlayerControl playerControl;
-    public float Rush_distance=0.4f;
-    public float attackDelay=0.8f;
+    public static float attackDelay=0.8f;//π•ª˜¿‰»¥ ±º‰
     private Animator animator;
     private bool canFire;
     public GameObject innerBurstPrefab;
     public GameObject trianglePrefab;
     private GameObject triangle;
-    [HideInInspector]public bool sprinting;//≥Â¥Ã
-    public float sprintingTime = 1f;
+    public bool sprinting;//≥Â¥Ã
+    public static float sprintingTime=0.4f;//≥Â¥Ã ±º‰
+    
 
      void Start()
     {
@@ -29,6 +29,7 @@ public class InnerForm : MonoBehaviour
         {
             triangle = Instantiate(trianglePrefab);
         }
+
     }
     
     private void Update()

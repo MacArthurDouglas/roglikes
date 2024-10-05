@@ -7,7 +7,7 @@ public class Triangle : MonoBehaviour
     public GameObject player;
     private InnerForm innerForm;
     private Renderer render;
-    public float playerDistance = 2f;
+    public float playerDistance;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -21,7 +21,9 @@ public class Triangle : MonoBehaviour
         if (innerForm.sprinting)
         {
             this.transform.position = player.transform.position;
-            this.transform.eulerAngles=Main.GetEulerAnglesByDirection(PlayerControl.CurrentDirection);
+            //this.transform.eulerAngles
+            Vector3 euler=Main.GetEulerAnglesByDirection(PlayerControl.CurrentDirection);
+            
             Vector3 location = new Vector3(0, 0, 0);
             Vector2 unitDirection = SurfaceForm.UnitDirection(PlayerControl.CurrentDirection);
             location.x = this.transform.position.x + unitDirection.x * playerDistance;
