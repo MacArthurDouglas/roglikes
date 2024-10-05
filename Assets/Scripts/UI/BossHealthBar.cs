@@ -27,7 +27,7 @@ public class BossHealthBar : MonoBehaviour
 
     void Update()
     {
-        healthImg.fillAmount = Mathf.Lerp(healthImg.fillAmount,Boss.CurrentHealth/Boss.MaxHealth,lerpSpeed*Time.deltaTime);
+        healthImg.fillAmount = Mathf.Lerp(healthImg.fillAmount,(float)Boss.CurrentHealth/(float)Boss.MaxHealth,lerpSpeed*Time.deltaTime);
         
     }
 }

@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
 {
     public GameObject[] fivePoints;
     public GameObject[] eightPoints;
-    public static int MaxHealth=1000;
+    public static int MaxHealth=200;
     public static int CurrentHealth;
     public GameObject tentacle;//´¥ÊÖ
     public GameObject selfExplodeMonster;//×Ô±¬¹Ö
@@ -115,7 +115,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(invincibleTime);
         invincible = false;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("AAA");
         switch (collision.tag)
@@ -124,6 +124,8 @@ public class Boss : MonoBehaviour
                 if (!invincible)
                 {
                     BeingHit(10);
+                    StartCoroutine(Invincibling());
+                    Debug.Log(CurrentHealth);
                 }
                 break;
         }

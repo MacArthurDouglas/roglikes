@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Triangle : MonoBehaviour
+public class CiJi : MonoBehaviour
 {
     public GameObject player;
     private InnerForm innerForm;
@@ -23,6 +23,7 @@ public class Triangle : MonoBehaviour
             this.transform.position = player.transform.position;
             
             Vector3 euler=Main.GetEulerAnglesByDirection(PlayerControl.CurrentDirection);
+            euler.z -= 135;
             this.transform.eulerAngles=euler;
             Vector3 location = new Vector3(0, 0, 0);
             Vector2 unitDirection = SurfaceForm.UnitDirection(PlayerControl.CurrentDirection);
