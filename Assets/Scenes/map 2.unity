@@ -108851,7 +108851,7 @@ Transform:
   m_GameObject: {fileID: 1896305289}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.48, y: -0.87, z: 0}
+  m_LocalPosition: {x: 5.62, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123159,7 +123159,7 @@ GameObject:
   - component: {fileID: 7867730774825731181}
   - component: {fileID: 7867730774825731182}
   m_Layer: 0
-  m_Name: lastboss
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123265,8 +123265,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d7b91c723cb8f42b95f93cf0cd5159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fivePoints: []
-  eightPoints: []
+  fivePoints:
+  - {fileID: 1797590924}
+  - {fileID: 1320128575}
+  - {fileID: 731044463}
+  - {fileID: 2090739173}
+  - {fileID: 790708703}
+  eightPoints:
+  - {fileID: 1182935842}
+  - {fileID: 1741063491}
+  - {fileID: 1751508042}
+  - {fileID: 922956230}
+  - {fileID: 2086385630}
+  - {fileID: 2028927061}
+  - {fileID: 896354966}
+  - {fileID: 1896305289}
   tentacle: {fileID: 0}
   selfExplodeMonster: {fileID: 0}
   attackDelay: 5
@@ -123349,8 +123362,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1907109476}
   - {fileID: 1428363398}
-  - {fileID: 1929304568}
   - {fileID: 7867730774825731179}
+  - {fileID: 1929304568}
   - {fileID: 1489335354}
   - {fileID: 879293807}
   - {fileID: 932819506}
