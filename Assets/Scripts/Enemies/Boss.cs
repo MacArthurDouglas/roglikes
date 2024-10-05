@@ -8,8 +8,8 @@ public class Boss : MonoBehaviour
 {
     public GameObject[] fivePoints;
     public GameObject[] eightPoints;
-    public int maxHealth;
-    public int currentHealth;
+    public static int MaxHealth=1000;
+    public static int CurrentHealth;
     public GameObject tentacle;//´¥ÊÖ
     public GameObject selfExplodeMonster;//×Ô±¬¹Ö
     public float attackDelay=5f;
@@ -18,16 +18,28 @@ public class Boss : MonoBehaviour
     private int whenTimesSkill;
     private bool usedSkill1;
     private bool usedSkill2;
+    public GameObject bossHealthBar;
+    private float invincibleTime = 0.5f;
+    private bool invincible;
     private void Start()
     {
         beingAttackedTimes = 0;
         whenTimesSkill = 0;
         usedSkill1=false;
         usedSkill2=false;
+        invincible=false;
+        CurrentHealth=MaxHealth;
+        ShowBossHealth();
+
+    }
+    public void ShowBossHealth()
+    {
+        bossHealthBar.SetActive(true);
+        
     }
     private void Update()
     {
-        if (beingAttackedTimes>=4&&beingAttackedTimes<9)
+/*        if (beingAttackedTimes>=4&&beingAttackedTimes<9)
         {
             if (!usedSkill1&&attckCooling==false)
             {
@@ -46,7 +58,7 @@ public class Boss : MonoBehaviour
             {
                 StartCoroutine(NormalAttack());
             }
-        }
+        }*/
     }
     IEnumerator NormalAttack()
     {
@@ -93,8 +105,27 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(attackDelay);
         attckCooling = false;
     }
+    void BeingHit(int damage)
+    {
+        CurrentHealth-= damage;
+    }
+    IEnumerator Invincibling()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(invincibleTime);
+        invincible = false;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        Debug.Log("AAA");
+        switch (collision.tag)
+        {
+            case "PlayerWeapons":
+                if (!invincible)
+                {
+                    BeingHit(10);
+                }
+                break;
+        }
     }
 }
