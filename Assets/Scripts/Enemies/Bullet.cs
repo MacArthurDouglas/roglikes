@@ -14,23 +14,21 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
+
         if (target != null)
         {
-            // 朝着目标移动
             Vector3 direction = (target.position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
 
-            // 检测碰撞
             if (Vector3.Distance(transform.position, target.position) < 0.5f)
             {
-                // 对目标造成伤害
                 PlayerControl playerControl = target.GetComponent<PlayerControl>();
-                if (playerControl != null&& !playerControl.IsInvincible)
+                if (playerControl != null && !playerControl.IsInvincible)
                 {
-                    playerControl.ChangeHealth(-damage); // 使用 ChangeHealth 方法
-                    playerControl.StartInvincibleTime(1f);
+                    playerControl.ChangeHealth(-damage);
+                    playerControl.StartInvincibleTime(1f); 
                 }
-                Destroy(gameObject); // 销毁法球
+                Destroy(gameObject);
             }
         }
     }

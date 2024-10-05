@@ -45,7 +45,6 @@ public class EliteEnemyMovement : EnemyMovement
     private IEnumerator DashTowardsPlayer(Vector3 direction)
     {
         isDashing = true; // 设置为冲刺状态
-        yield return new WaitForSeconds(1f); // 等待1秒
         float dashSpeed = speed * 2; // 冲刺时的速度
         float dashDuration = 0.5f; // 冲刺持续时间
         float elapsed = 0;
@@ -55,6 +54,17 @@ public class EliteEnemyMovement : EnemyMovement
             transform.position = Vector3.Lerp(transform.position, transform.position + direction * dashSpeed * Time.deltaTime, elapsed / dashDuration);
             elapsed += Time.deltaTime;
             yield return null; // 等待下一帧
+        }
+
+        // 冲刺结束，检测与玩家的碰撞
+        if (player != null)
+        {
+            PlayerControl playerControl = player.GetComponent<PlayerControl>();
+            if (playerControl != null && !playerControl.IsInvincible) // 检查玩家是否无敌
+            {
+                playerControl.ChangeHealth(-20); // 造成20点伤害
+                playerControl.StartInvincibleTime(1f); // 启动无敌时间
+            }
         }
 
         isDashing = false; // 恢复为非冲刺状态

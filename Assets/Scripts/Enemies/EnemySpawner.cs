@@ -41,11 +41,11 @@ public class EnemySpawner : MonoBehaviour
 
                 GameObject newEnemy;
                 float randomValue = Random.Range(0f, 1f);
-                if (randomValue < 0.1f) // 5% 概率生成精英怪 1
+                if (randomValue < 0.5f) // 5% 概率生成精英怪 1
                 {
                     newEnemy = Instantiate(eliteEnemyPrefab, spawnPosition, Quaternion.identity);
                 }
-                else if (randomValue < 0.5f) // 20% 概率生成精英怪 2（25% - 5% = 20%）
+                else if (randomValue < 0.1f) // 20% 概率生成精英怪 2（25% - 5% = 20%）
                 {
                     newEnemy = Instantiate(eliteEnemyPrefab2, spawnPosition, Quaternion.identity);
                 }
