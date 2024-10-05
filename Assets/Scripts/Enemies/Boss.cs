@@ -8,9 +8,9 @@ public class Boss : MonoBehaviour
 {
     public GameObject[] fivePoints;
     public GameObject[] eightPoints;
-    public static int MaxHealth=200;
+    public static int MaxHealth=100;
     public static int CurrentHealth; 
-
+    
     public GameObject slimeCanMove;//可以移动的史莱姆
     public GameObject slimeStatic;//不可移动的史莱姆
 
@@ -24,27 +24,38 @@ public class Boss : MonoBehaviour
     private int whenTimesSkill;
    
     private bool usedSkill1;
-    private bool usedSkill2;
     public GameObject bossHealthBar;
     private float invincibleTime = 0.5f;
     private bool invincible;
-    private bool skill2finished;
+    public static bool skill2finished;
+    public static int KilledSlimeStatic;
     private Vector3 centerOfMagicCircle=new Vector3(4.96f,18.92f,-2.22f);
+    private Coroutine invincibling;//无敌的协程
     private void Start()
     {
         beingAttackedTimes = 0;
         whenTimesSkill = 0;
+        
         usedSkill1=false;
-        usedSkill2=false;
         invincible=false;
-        skill2finished=false;
+        skill2finished=true;
         normalAttackCooling= false;
         player = GameObject.FindWithTag("Player");
         CurrentHealth = MaxHealth;
         ShowBossHealth();
         StartCoroutine(NormalAttackCool());
-        
+        StartCoroutine(Dying());
 
+    }
+    IEnumerator Dying()
+    {
+        while (true) {
+            if (CurrentHealth<=0)
+            {
+                Destroy(this.gameObject);
+            }
+            yield return null;
+        }
     }
     public void ShowBossHealth()
     {
@@ -53,25 +64,23 @@ public class Boss : MonoBehaviour
     }
     private void Update()
     {
-        if (beingAttackedTimes>=5&&beingAttackedTimes<10)
+        //Debug.Log(beingAttackedTimes);
+        if (beingAttackedTimes>=5)
         {
             if (!usedSkill1&&attckCooling==false)
             {
                 StartCoroutine(Skill1());
+                return;
             }
-        }
-        else if(beingAttackedTimes>=10)
-        {
-            if (!usedSkill2 && attckCooling == false)
+            if (usedSkill1&&skill2finished && attckCooling == false)
             {
                 StartCoroutine(Skill2());
+                return;
             }
         }
-        else {
-            if (attckCooling == false)
-            {
-                StartCoroutine(Moving());
-            }
+        if (attckCooling == false)
+        {
+            StartCoroutine(Moving());
         }
     }
     IEnumerator NormalAttackCool() { 
@@ -127,7 +136,8 @@ public class Boss : MonoBehaviour
 
         
         yield return new WaitForSeconds(attackDelay);
-        attckCooling=false;
+        attckCooling = false;
+        beingAttackedTimes = 0;
     }
     IEnumerator SummonSlime()
     {
@@ -140,21 +150,27 @@ public class Boss : MonoBehaviour
     }
     IEnumerator Skill2()
     {
-        usedSkill2 = true;
+ 
         attckCooling = true;
-        beingAttackedTimes = 0;
+        
+        KilledSlimeStatic = 0;
         this.transform.position=centerOfMagicCircle;//回到法阵中心
+        //StopCoroutine(Invincibling());
+        if (invincibling != null)
+        {
+            StopCoroutine(invincibling);
+        }
         invincible = true;//进入无敌
         skill2finished = false;
         StartCoroutine(SummonSlime());
         while (!skill2finished) {
             yield return null;
         }
-        
-        
 
 
-        yield return new WaitForSeconds(attackDelay);
+        usedSkill1 = false;
+        beingAttackedTimes = 0;
+        invincible =false;
         attckCooling = false;
     }
     void BeingHit(int damage)
@@ -169,15 +185,15 @@ public class Boss : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("AAA");
         switch (collision.tag)
         {
             case "PlayerWeapons":
                 if (!invincible)
                 {
-                    BeingHit(10);
-                    StartCoroutine(Invincibling());
-                    Debug.Log(CurrentHealth);
+                    BeingHit(1);
+                    beingAttackedTimes++;
+                    invincibling=StartCoroutine(Invincibling());
+                    //Debug.Log(CurrentHealth);
                 }
                 break;
         }

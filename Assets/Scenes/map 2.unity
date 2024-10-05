@@ -370,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -910, y: -490}
+  m_AnchoredPosition: {x: -830.31006, y: -433.99994}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7373797
@@ -9855,7 +9855,7 @@ GameObject:
   - component: {fileID: 149321201}
   - component: {fileID: 149321200}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9911,7 +9911,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1428363397}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -9943,7 +9943,7 @@ RectTransform:
   - {fileID: 2031614276}
   - {fileID: 255997522}
   - {fileID: 1987451145}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1428363398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11957,7 +11957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -605, y: -490}
+  m_AnchoredPosition: {x: -525.31, y: -433.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &186185812
@@ -16008,7 +16008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.176}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -760.69, y: -395}
+  m_AnchoredPosition: {x: -681, y: -339}
   m_SizeDelta: {x: 398.6227, y: 78.6278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255997523
@@ -18285,7 +18285,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -808, y: -490}
+  m_AnchoredPosition: {x: -728.31, y: -433.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292677663
@@ -79094,6 +79094,7 @@ Transform:
   m_LocalScale: {x: 0.35313824, y: 0.35313824, z: 0.35313824}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 149321203}
   - {fileID: 1456043973}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80354,7 +80355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.21, y: 0.09}
+  m_AnchoredPosition: {x: 8.11, y: 0.09}
   m_SizeDelta: {x: 2, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1456043974
@@ -115037,7 +115038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -760.69, y: -394}
+  m_AnchoredPosition: {x: -681, y: -337.99997}
   m_SizeDelta: {x: 432.7968, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987451146
@@ -118208,7 +118209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -502, y: -490}
+  m_AnchoredPosition: {x: -422.31, y: -433.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031614277
@@ -123872,7 +123873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -708, y: -490}
+  m_AnchoredPosition: {x: -628.31, y: -433.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142541851
@@ -124133,9 +124134,9 @@ MonoBehaviour:
   - {fileID: 2028927061}
   - {fileID: 896354966}
   - {fileID: 1896305289}
-  slimeCanMove: {fileID: 0}
-  slimeStatic: {fileID: 0}
-  selfExplodeMonster: {fileID: 0}
+  slimeCanMove: {fileID: 2276124660765967452, guid: 103638820f747614fb447cf8bb129ba7, type: 3}
+  slimeStatic: {fileID: 6703698819340414485, guid: 8c40ff6e66d85fe4ab65e80e307574d1, type: 3}
+  selfExplodeMonster: {fileID: 6266759063917268812, guid: da2d1a81a42d57d4fa61ca839520e090, type: 3}
   bossHealthBar: {fileID: 1048700561}
 --- !u!61 &7867730774825731181
 BoxCollider2D:
@@ -124227,5 +124228,4 @@ SceneRoots:
   - {fileID: 1785192030}
   - {fileID: 446757315}
   - {fileID: 409581015}
-  - {fileID: 149321203}
   - {fileID: 439610567}

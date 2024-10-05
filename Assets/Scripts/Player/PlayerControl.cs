@@ -47,7 +47,7 @@ public class PlayerControl: MonoBehaviour
     }
     void Update()
     {
-        print(currentHealth);
+        //print(currentHealth);
         moved = false;
         Vector3 move = Vector3.zero;
         bool fire=false;
