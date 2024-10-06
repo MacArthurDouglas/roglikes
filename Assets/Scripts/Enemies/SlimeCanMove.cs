@@ -45,14 +45,10 @@ public class SlimeCanMove : MonoBehaviour
         }
         animator.SetBool("attacking",attacking);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.tag == "PlayerWeapons")
-        {
-            isDead= true;
-            animator.SetBool("isDead", isDead);
-        }
-        else if(collision.tag == "Player")
+        
+        if (collision.gameObject.tag == "Player")
         {
             // 获取动画控制器中第 0 层（默认层）的当前动画状态信息
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -62,6 +58,14 @@ public class SlimeCanMove : MonoBehaviour
             {
                 player.GetComponent<PlayerControl>().ChangeHealth(-1);
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "PlayerWeapons")
+        {
+            isDead = true;
+            animator.SetBool("isDead", isDead);
         }
     }
 

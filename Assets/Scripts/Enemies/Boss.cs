@@ -21,7 +21,6 @@ public class Boss : MonoBehaviour
     private bool attckCooling;
     private bool normalAttackCooling;
     private int beingAttackedTimes;
-    private int whenTimesSkill;
    
     private bool usedSkill1;
     public GameObject bossHealthBar;
@@ -34,7 +33,6 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         beingAttackedTimes = 0;
-        whenTimesSkill = 0;
         
         usedSkill1=false;
         invincible=false;
@@ -52,10 +50,12 @@ public class Boss : MonoBehaviour
         while (true) {
             if (CurrentHealth<=0)
             {
+                MusicControl.Winning();
                 Destroy(this.gameObject);
             }
             yield return null;
         }
+        
     }
     public void ShowBossHealth()
     {

@@ -8,16 +8,20 @@ public class EnemyMovement : MonoBehaviour
     public float avoidDistance = 0.5f; // 避让距离
     private Animator animator;
     [SerializeField] protected GameObject player;
-    public MonsterManager monsterManager;
+    public Energy monsterManager;
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>(); // 获取Animator组件
-        monsterManager = FindObjectOfType<MonsterManager>();
+        monsterManager = FindObjectOfType<Energy>();
     }
 
     protected virtual void Update()
     {
+        if (animator.GetBool("isDead"))
+        {
+            return;
+        }
         if (player != null)
         {
             MoveTowardsPlayer();
@@ -84,7 +88,18 @@ public class EnemyMovement : MonoBehaviour
             monsterManager.OnMonsterDeath();
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "PlayerWeapons")
+        {
+            // 设置死亡状态
+            animator.SetBool("isDead", true);
+            // 销毁敌人
+            Destroy(gameObject, 1f); // 延迟1秒后销毁，给动画播放时间
+            monsterManager.OnMonsterDeath();
 
+        }
+    }
     private IEnumerator ResetInvincibleTime(float delay)
     {
         yield return new WaitForSeconds(delay);

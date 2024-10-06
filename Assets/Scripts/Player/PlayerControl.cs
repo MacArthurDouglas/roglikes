@@ -35,7 +35,7 @@ public class PlayerControl: MonoBehaviour
     public AudioClip innerAttackSound; // 引用行走音效
     private SurfaceForm surfaceForm;
     private InnerForm innerForm;
-
+    private Vector3 spawnPoint=new Vector3(-2.17f,-32.27f,-1.409f);
     private void Start()
     {
         currentHealth = Main.MaxHealth;
@@ -232,7 +232,20 @@ public class PlayerControl: MonoBehaviour
             yield return 0;
         }
         animator.SetBool("dying", true);
-        Debug.Log("你挂了！");
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Reborn());
+        
+    }
+    IEnumerator Reborn() {
+        animator.SetBool("dying", false);
+        animator.SetBool("resurrection",true );
+        transform.position=spawnPoint;
+
+        yield return new WaitForSeconds(0.2f);
+        currentHealth=Main.MaxHealth;
+        UpdateHeartUI();
+        animator.SetBool("resurrection", false);
+        StartCoroutine(Dying());
     }
     public void ChangeHealth(int value)
     {

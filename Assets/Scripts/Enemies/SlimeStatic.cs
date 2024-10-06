@@ -48,25 +48,10 @@ public class SlimeStatic : MonoBehaviour
         }
         animator.SetBool("attacking", attacking);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.tag == "PlayerWeapons")
-        {
-            currentHealth--;
-            if (currentHealth < 0)
-            {
-                isDead = true;
-                animator.SetBool("isDead", isDead);
-                Boss.KilledSlimeStatic++;
-                if(Boss.KilledSlimeStatic >= 2)
-                {
-                    Boss.skill2finished = true;
-                }
-            }
-            
-
-        }
-        else if (collision.tag == "Player")
+        
+        if (collision.gameObject.tag == "Player")
         {
             // 获取动画控制器中第 0 层（默认层）的当前动画状态信息
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -76,6 +61,25 @@ public class SlimeStatic : MonoBehaviour
             {
                 player.GetComponent<PlayerControl>().ChangeHealth(-1);
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerWeapons")
+        {
+            currentHealth--;
+            if (currentHealth < 0)
+            {
+                isDead = true;
+                animator.SetBool("isDead", isDead);
+                Boss.KilledSlimeStatic++;
+                if (Boss.KilledSlimeStatic >= 2)
+                {
+                    Boss.skill2finished = true;
+                }
+            }
+
+
         }
     }
 }
