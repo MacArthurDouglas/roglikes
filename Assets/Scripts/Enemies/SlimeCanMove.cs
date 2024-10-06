@@ -48,17 +48,7 @@ public class SlimeCanMove : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (collision.gameObject.tag == "Player")
-        {
-            // 获取动画控制器中第 0 层（默认层）的当前动画状态信息
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-            // 判断当前动画是否是某个特定的动画
-            if (stateInfo.IsName("slimeattack"))
-            {
-                player.GetComponent<PlayerControl>().ChangeHealth(-10);
-            }
-        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -68,6 +58,22 @@ public class SlimeCanMove : MonoBehaviour
             animator.SetBool("isDead", isDead);
             Energy.AddEnergy();
             GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        
+        if (collision.gameObject.tag == "Player")
+        {
+            // 获取动画控制器中第 0 层（默认层）的当前动画状态信息
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            // 判断当前动画是否是某个特定的动画
+            if (stateInfo.IsName("slimeattack"))
+            {
+                player.GetComponent<PlayerControl>().MonsterHit(10);
+            }
         }
     }
 

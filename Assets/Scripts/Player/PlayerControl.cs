@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +38,7 @@ public class PlayerControl: MonoBehaviour
     private InnerForm innerForm;
     private Vector3 spawnPoint=new Vector3(-2.17f,-32.27f,-1.409f);
     private static GameObject instance;
+    private float invincibleTime = 1f;
     private void Start()
     {
         instance = this.gameObject;
@@ -55,6 +57,14 @@ public class PlayerControl: MonoBehaviour
         animator.SetBool("surface", Surface);
         audioSource = GameObject.Find("AudioManager1").GetComponent<AudioSource>();
 
+    }
+    public void MonsterHit(int value)
+    {
+        ChangeHealth(-value);
+        if (!IsInvincible)
+        {
+            StartInvincibleTime(invincibleTime);
+        }
     }
     public static void SwitchSurface() { 
         Surface=!Surface;

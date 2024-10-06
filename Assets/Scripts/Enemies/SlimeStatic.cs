@@ -51,6 +51,10 @@ public class SlimeStatic : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
+        
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.gameObject.tag == "Player")
         {
             // 获取动画控制器中第 0 层（默认层）的当前动画状态信息
@@ -59,7 +63,7 @@ public class SlimeStatic : MonoBehaviour
             // 判断当前动画是否是某个特定的动画
             if (stateInfo.IsName("slimeattack"))
             {
-                player.GetComponent<PlayerControl>().ChangeHealth(-10);
+                player.GetComponent<PlayerControl>().MonsterHit(10);
             }
         }
     }
@@ -82,5 +86,6 @@ public class SlimeStatic : MonoBehaviour
 
 
         }
+        
     }
 }
