@@ -7,14 +7,19 @@ public class Energy : MonoBehaviour
     private int currentEnergy; // 死亡数量
     private const int maxEnergy = 30;   // 最大死亡数量
     public static int energy;
+    private static GameObject instance;
 
     void Start()
     {
+        instance=this.gameObject;
         currentEnergy = 0;
         energy = currentEnergy;
         UpdateEnergyBar();
     }
-
+    public static void AddEnergy()
+    {
+        instance.GetComponent<Energy>().OnMonsterDeath();
+    }
     // 调用此方法以增加死亡数量
     public void OnMonsterDeath()
     {

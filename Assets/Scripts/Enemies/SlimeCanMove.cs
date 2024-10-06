@@ -66,6 +66,7 @@ public class SlimeCanMove : MonoBehaviour
         {
             isDead = true;
             animator.SetBool("isDead", isDead);
+            Energy.AddEnergy();
             GetComponent<BoxCollider2D>().enabled = false;
         }
     }

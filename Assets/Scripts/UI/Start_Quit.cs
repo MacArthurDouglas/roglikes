@@ -8,7 +8,7 @@ public class Start_Quit: MonoBehaviour
 {
     public void StartLoadingGame()
     {   
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Map2");
     }
     public void Quit(){
         Application.Quit();

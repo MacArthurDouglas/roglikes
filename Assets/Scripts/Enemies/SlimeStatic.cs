@@ -72,6 +72,7 @@ public class SlimeStatic : MonoBehaviour
             {
                 isDead = true;
                 animator.SetBool("isDead", isDead);
+                Energy.AddEnergy();
                 Boss.KilledSlimeStatic++;
                 if (Boss.KilledSlimeStatic >= 2)
                 {

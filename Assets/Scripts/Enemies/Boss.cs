@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
 {
     public GameObject[] fivePoints;
     public GameObject[] eightPoints;
-    public static int MaxHealth=100;
+    private static int MaxHealth=100;
     public static int CurrentHealth; 
     
     public GameObject slimeCanMove;//可以移动的史莱姆
@@ -30,6 +30,10 @@ public class Boss : MonoBehaviour
     public static int KilledSlimeStatic;
     private Vector3 centerOfMagicCircle=new Vector3(4.96f,18.92f,-2.22f);
     private Coroutine invincibling;//无敌的协程
+    public static int GetMaxHealth()
+    {
+        return MaxHealth;
+    }
     private void Start()
     {
         beingAttackedTimes = 0;
@@ -190,7 +194,7 @@ public class Boss : MonoBehaviour
             case "PlayerWeapons":
                 if (!invincible)
                 {
-                    BeingHit(1);
+                    BeingHit(2);
                     beingAttackedTimes++;
                     invincibling=StartCoroutine(Invincibling());
                     //Debug.Log(CurrentHealth);
