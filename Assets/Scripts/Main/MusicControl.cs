@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameMusicController : MonoBehaviour
+public class MusicControl : MonoBehaviour
 {
     public AudioSource inGame;
     public AudioSource win;
