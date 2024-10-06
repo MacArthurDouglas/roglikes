@@ -36,8 +36,10 @@ public class PlayerControl: MonoBehaviour
     private SurfaceForm surfaceForm;
     private InnerForm innerForm;
     private Vector3 spawnPoint=new Vector3(-2.17f,-32.27f,-1.409f);
+    private static GameObject instance;
     private void Start()
     {
+        instance = this.gameObject;
         currentHealth = Main.MaxHealth;
         UpdateHeartUI(); // 初始化心的UI
         rb = this.GetComponent<Rigidbody2D>();
@@ -53,6 +55,17 @@ public class PlayerControl: MonoBehaviour
         animator.SetBool("surface", Surface);
         audioSource = GameObject.Find("AudioManager1").GetComponent<AudioSource>();
 
+    }
+    public static void SwitchSurface() { 
+        Surface=!Surface;
+        if (Surface)
+        {
+            instance.GetComponent<SurfaceForm>().SpecialAttack();
+        }
+        else
+        {
+            instance.GetComponent<InnerForm>().SpecialAttack();
+        }
     }
     void Update()
     {

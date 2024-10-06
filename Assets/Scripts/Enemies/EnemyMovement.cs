@@ -18,8 +18,10 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void Update()
     {
+
         if (animator.GetBool("isDead"))
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             return;
         }
         if (player != null)
@@ -84,7 +86,7 @@ public class EnemyMovement : MonoBehaviour
             // 设置死亡状态
             animator.SetBool("isDead", true);
             // 销毁敌人
-            Destroy(gameObject, 1f); // 延迟1秒后销毁，给动画播放时间
+            Destroy(gameObject, 0.5f); // 延迟1秒后销毁，给动画播放时间
             monsterManager.OnMonsterDeath();
         }
     }
@@ -95,7 +97,7 @@ public class EnemyMovement : MonoBehaviour
             // 设置死亡状态
             animator.SetBool("isDead", true);
             // 销毁敌人
-            Destroy(gameObject, 1f); // 延迟1秒后销毁，给动画播放时间
+            Destroy(gameObject, 0.5f); // 延迟1秒后销毁，给动画播放时间
             monsterManager.OnMonsterDeath();
 
         }

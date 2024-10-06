@@ -56,7 +56,7 @@ public class SlimeCanMove : MonoBehaviour
             // 判断当前动画是否是某个特定的动画
             if (stateInfo.IsName("slimeattack"))
             {
-                player.GetComponent<PlayerControl>().ChangeHealth(-1);
+                player.GetComponent<PlayerControl>().ChangeHealth(-10);
             }
         }
     }
@@ -66,6 +66,7 @@ public class SlimeCanMove : MonoBehaviour
         {
             isDead = true;
             animator.SetBool("isDead", isDead);
+            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
