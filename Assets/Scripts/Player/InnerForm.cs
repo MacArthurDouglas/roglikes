@@ -39,13 +39,13 @@ public class InnerForm : MonoBehaviour
             transform.position += new Vector3(PlayerControl.CurrentDirection.x, PlayerControl.CurrentDirection.y,0) * playerControl.speed *2* Time.deltaTime;
         }
     }
+    public bool active()
+    {
+        return canFire&&!sprinting;
+    }
     public void NormalAttack()
     {
-        if (!canFire||sprinting)
-        {
-            return;
-        }
-        animator.SetBool("attacking", true);
+        
         StartCoroutine(Sprinting(sprintingTime));
         StartCoroutine(Cooldown());
     }

@@ -25,13 +25,16 @@ public class PlayerControl: MonoBehaviour
     public static bool CanMove;
     public Animator animator;
     private bool moved;
-    private InnerForm innerForm;
+   
     public int maxHearts = 5; // 最大心数
     public int heartValue = 40; // 每颗心对应的生命值
     public Image[] heartImages; // UI中的心形图像数组
     private AudioSource audioSource;
     public AudioClip walkSound; // 引用行走音效
-    public AudioClip attackSound; // 攻击音效
+    public AudioClip surfaceAttackSound; // 引用行走音效
+    public AudioClip innerAttackSound; // 引用行走音效
+    private SurfaceForm surfaceForm;
+    private InnerForm innerForm;
 
     private void Start()
     {
@@ -44,6 +47,7 @@ public class PlayerControl: MonoBehaviour
         CanMove = true;
         animator = GetComponent<Animator>();
         innerForm = GetComponent<InnerForm>();
+        surfaceForm = GetComponent<SurfaceForm>();
         animator.SetBool("dying", false);
         animator.SetBool("resurrection", false);
         animator.SetBool("surface", Surface);
@@ -125,32 +129,29 @@ public class PlayerControl: MonoBehaviour
             }
         }
         Vector2 dirc = new Vector2(0, 0);
-        if (Input.GetKeyDown(fireUpKey))
+        if (Input.GetKey(fireUpKey))
         {
             dirc += new Vector2(0, 1);
             fire = true;
-            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
 
-        if (Input.GetKeyDown(fireDownKey))
+        if (Input.GetKey(fireDownKey))
         {
             dirc += new Vector2(0, -1);
             fire = true;
-            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
 
-        if (Input.GetKeyDown(fireRightKey))
+        if (Input.GetKey(fireRightKey))
         {
             dirc += new Vector2(1, 0);
             fire = true;
-            audioSource.PlayOneShot(attackSound); // 播放攻击音效
         }
 
-        if (Input.GetKeyDown(fireLeftKey))
+        if (Input.GetKey(fireLeftKey))
         {
             dirc += new Vector2(-1, 0);
             fire = true;
-            audioSource.PlayOneShot(attackSound); // 播放攻击音效
+            
         }
 
         if (fire)
@@ -184,16 +185,30 @@ public class PlayerControl: MonoBehaviour
             
             if (Surface)
             {
-                this.GetComponent<SurfaceForm>().NormalAttack();
-                if (CanMove)
+                if (surfaceForm.active())
                 {
-                    StartCoroutine(DisabledMove(0.1f));
+                    audioSource.PlayOneShot(surfaceAttackSound); // 播放攻击音效
+                    this.GetComponent<SurfaceForm>().NormalAttack();
+
+                    if (CanMove)
+                    {
+                        StartCoroutine(DisabledMove(0.1f));
+                    }
+                    animator.SetBool("attacking", true);
                 }
+                
             }
             else
             {
-                this.GetComponent<InnerForm>().NormalAttack();
+                if (innerForm.active())
+                {
+                    audioSource.PlayOneShot(innerAttackSound); // 播放攻击音效
+                    this.GetComponent<InnerForm>().NormalAttack();
+                    animator.SetBool("attacking", true);
+                }
+                
             }
+            
         }
         else
         {

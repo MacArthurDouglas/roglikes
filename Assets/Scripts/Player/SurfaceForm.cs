@@ -18,6 +18,9 @@ public class SurfaceForm : MonoBehaviour
 
         
     }
+    public bool active() {
+        return canFire;
+    }
     public static Vector2 UnitDirection(Vector2 direction)
     {
         Vector2 unitDirection=new Vector2(0,0);
@@ -28,12 +31,8 @@ public class SurfaceForm : MonoBehaviour
     }
     public void NormalAttack()
     {
-        
-        if (!canFire)
-        {
-            return;
-        }
         animator.SetBool("attacking", true);
+        
         Vector2 unitDirection = UnitDirection(PlayerControl.CurrentDirection);
         Vector3 center = new Vector3(0,0,0);
         center.x=this.transform.position.x-unitDirection.x*centerDistance;

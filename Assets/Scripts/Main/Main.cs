@@ -11,6 +11,7 @@ public class Main : MonoBehaviour
 {
     public static int MaxHealth=200;
     public static int Damage=10;
+    public static int FindItemNum;
     public static Vector3 GetEulerAnglesByDirection(Vector2 currentDirection)
     {
         Vector3 eulerAngles = new Vector3(0, 0, 0);
